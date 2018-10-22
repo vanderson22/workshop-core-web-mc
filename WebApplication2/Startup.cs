@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using WebApplication2.Models;
+using WebApplication2.Data;
+using WebApplication2.Services;
 
 namespace WebApplication2 {
     public class Startup {
@@ -28,13 +32,29 @@ namespace WebApplication2 {
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<WebApplication2Context>(options =>
+                    //options.UseSqlServer(Configuration.GetConnectionString("WebApplication2Context")));
+                    options.UseMySql(Configuration.GetConnectionString("WebApplication2Context"), b => b.MigrationsAssembly("WebApplication2")));
+
+
+            //registrando  serviço de seeding 
+            //Injeção de dependências
+            services.AddScoped<SeedingService>();
+
+            services.AddScoped<SellerService>();
+            services.AddScoped<DepartmentsService>(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seeding
+            ) {
+
+            //desenv
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
-            } else {
+                seeding.seed();
+            } else { //Produção
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
