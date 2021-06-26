@@ -35,7 +35,8 @@ namespace WebApplication2 {
 
             services.AddDbContext<WebApplication2Context>(options =>
                     //options.UseSqlServer(Configuration.GetConnectionString("WebApplication2Context")));
-                    options.UseMySql(Configuration.GetConnectionString("WebApplication2Context"), b => b.MigrationsAssembly("WebApplication2")));
+                    options.UseMySql(Configuration.GetConnectionString("WebApplication2Context"),
+                    b => b.MigrationsAssembly("WebApplication2")));
 
 
             //registrando  serviço de seeding 
