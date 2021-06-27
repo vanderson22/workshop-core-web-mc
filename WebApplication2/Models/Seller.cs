@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication2.Models {
-    public class Seller {
+namespace WebApplication2.Models
+{
+    public class Seller
+    {
 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -13,7 +15,7 @@ namespace WebApplication2.Models {
         public double Salary { get; set; }
         public Departments Departments { get; set; }
         public int DepartmentsId { get; set; }
-        public ICollection<SallesRecord> SallesRecords { get; set; } = new List<SallesRecord>();
+        public ICollection<SalesRecord> SallesRecords { get; set; } = new List<SalesRecord>();
 
         public Seller() {
         }
@@ -26,21 +28,24 @@ namespace WebApplication2.Models {
             Salary = salary;
         }
 
-        public void AddSalles(SallesRecord sr) {
+        public void AddSales(SalesRecord sr) {
             SallesRecords.Add(sr);
         }
 
-        public void RemoveSalles(SallesRecord sr) {
+        /// <summary>
+        ///  Remove sales method
+        /// </summary>
+        /// <param name="sr"></param>
+        public void RemoveSales(SalesRecord sr) {
             SallesRecords.Remove(sr);
         }
 
-        public double TotalSalles(DateTime initial, DateTime final) {
-
+        public double TotalSales(DateTime initial, DateTime final) {
 
             return
                 SallesRecords
-                    .Where(sr => sr.Date >= initial && sr.Date <= final )
-                    .Sum(sr=> sr.Amount);
+                    .Where(sr => sr.Date >= initial && sr.Date <= final)
+                    .Sum(sr => sr.Amount);
         }
 
     }

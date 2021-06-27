@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace WebApplication2.Models {
-    public class Departments {
+namespace WebApplication2.Models
+{
+    public class Departments
+    {
 
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -18,15 +19,25 @@ namespace WebApplication2.Models {
         public Departments() {
         }
 
+
+
         public void AddSeller(Seller s) {
 
             Sellers.Add(s);
-
         }
 
-        public double TotalSales(DateTime initial , DateTime final) {
+        public double TotalSales(DateTime initial, DateTime final) {
 
-            return Sellers.Sum(s => s.TotalSalles(initial, final));
+            return Sellers
+                            .Sum(
+                                    s => s.TotalSales(initial, final)
+                                  );
+        }
+
+        public double AverageBaseSalary() {
+
+            return Sellers
+                            .Average( s => s.Salary );
         }
 
     }
