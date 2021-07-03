@@ -43,8 +43,7 @@ namespace WebApplication2.Controllers
         }
 
         public IActionResult Delete(int id) {
-
-
+ 
             return
                 View(_sellerService.Delete(id));
         }
@@ -79,11 +78,11 @@ namespace WebApplication2.Controllers
         }
 
 
-        [HttpDelete]
+        [HttpPost] // ficar atendo aos posts de formulário
         [AutoValidateAntiforgeryToken]
-        public IActionResult DeleteSeller(int? id) {
+        public IActionResult RemoveSeller() {
 
-
+            _sellerService.DeleteSeller(4);
             return
               RedirectToAction(nameof(Index));
         }

@@ -1,7 +1,5 @@
 ﻿@model Seller
-@{
-    ViewData["Title"] = "Seller";
-}
+@{ ViewData["Title"] = "Seller"; }
 
 <h2>@ViewData["Title"] </h2>
 
@@ -9,49 +7,36 @@
 
 <hr />
 
+<dl class="dl-horizontal">
+    <dt>
+        Matrícula <!-- @Html.DisplayNameFor(model => model.Id)-->
+    </dt>
+    <dd> @Html.DisplayFor(modelItem => Model.Id)</dd>
+    <dt> @Html.DisplayNameFor(model => model.Name)</dt>
+    <dd>
+        @Html.DisplayFor(modelItem => Model.Name)
+    </dd>
+    <dt> @Html.DisplayNameFor(model => model.Email)</dt>
+    <dd>
+        @Html.DisplayFor(modelItem => Model.Email)
+    </dd>
+    <dt> @Html.DisplayNameFor(model => model.Salary)</dt>
+    <dd>
+        @Html.DisplayFor(modelItem => Model.Salary)
+    </dd>
+    <dt> @Html.DisplayNameFor(model => model.BirthDate)</dt>
+
+    <dd>
+        @Html.DisplayFor(modelItem => Model.BirthDate)
+    </dd>
 
 
+</dl>
 
-<table class="table table-striped table-hover">
-    <thead>
 
-        <tr class="success">
-            <th> @Html.DisplayNameFor(model => model.Id)</th>
-            <th> @Html.DisplayNameFor(model => model.Name)</th>
-            <th> @Html.DisplayNameFor(model => model.Email)</th>
-            <th> @Html.DisplayNameFor(model => model.Salary)</th>
-            <th> @Html.DisplayNameFor(model => model.BirthDate)</th>
-            <th>Edit</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => Model.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => Model.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => Model.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => Model.Salary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => Model.BirthDate)
-            </td>
-            <td>
-
-                <!-- aqui é post!-->
-                <form asp-action="DeleteSeller"></form>
-                <input type="submit" value="Delete" class="btn btn-default" />
-
-            </td>
-
-        </tr>
-    </tbody>
-</table>
-
+<!-- aqui é post!-->
+<form  asp-action="RemoveSeller" asp-controller="Sellers">
+    <input type="hidden" name="id" asp-for="@Model.Id"  />
+    <input type="submit" value="Delete" class="btn-danger" />
+</form>
 

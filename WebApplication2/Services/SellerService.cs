@@ -29,6 +29,11 @@ namespace WebApplication2.Services
         }
 
         public Seller Delete(int id) => _context.Seller.First(m => m.Id == id);
+        public void DeleteSeller(int id) {
+            _context.Seller.Remove(this.FindById(id));
+            _context.SaveChanges();
+
+        }
 
         internal void Update(Seller seller) {
             _context.Update(seller);
