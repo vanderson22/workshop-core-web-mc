@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication2.Models
 {
+    /// <summary>
+    /// Contains dbSet's from application
+    /// </summary>
     public class WebApplication2Context : DbContext
     {
         public WebApplication2Context(DbContextOptions<WebApplication2Context> options)

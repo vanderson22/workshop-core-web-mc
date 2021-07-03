@@ -14,8 +14,13 @@ using WebApplication2.Models;
 using WebApplication2.Data;
 using WebApplication2.Services;
 
-namespace WebApplication2 {
-    public class Startup {
+namespace WebApplication2
+{
+    /// <summary>
+    /// Executa on startup
+    /// </summary>
+    public class Startup
+    {
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
@@ -43,18 +48,21 @@ namespace WebApplication2 {
             //Injeção de dependências
             services.AddScoped<SeedingService>();
 
+            //register new services
             services.AddScoped<SellerService>();
-            services.AddScoped<DepartmentsService>(); 
+            services.AddScoped<DepartmentsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // A instancia de SeedingService é automatica por causa da injecao AddScoped
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seeding
             ) {
 
             //desenv
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
-                seeding.seed();
+                //Executa o método seed
+                seeding.Seed();
             } else { //Produção
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
