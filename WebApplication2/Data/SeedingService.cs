@@ -41,6 +41,12 @@ namespace WebApplication2.Data
             Seller s3 = new Seller(3, "Jane", "Jane@hotmail.com", new DateTime(1992, 4, 21), 1100.0);
             Seller s5 = new Seller(4, "Richard", "Richard@gmail.com", new DateTime(1998, 4, 26), 1000.0);
 
+            s1.DepartmentsId = 1;
+            s2.DepartmentsId = 2;
+            s3.DepartmentsId = 1;
+
+            s5.DepartmentsId = 3;
+
             SalesRecord sr1 = new SalesRecord(1, new DateTime(2018, 4, 26), 100.0, Models.Enums.SallesStatus.Billed, s1);
             SalesRecord sr2 = new SalesRecord(2, new DateTime(2018, 4, 26), 11110.0, Models.Enums.SallesStatus.Billed, s3);
             SalesRecord sr3 = new SalesRecord(3, new DateTime(2018, 4, 26), 12200.0, Models.Enums.SallesStatus.Pending, s2);

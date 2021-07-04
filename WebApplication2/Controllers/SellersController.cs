@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication2.Models;
 using WebApplication2.Models.ViewModels;
 using WebApplication2.Services;
+using WebApplication2.Services.Exceptions;
 
 namespace WebApplication2.Controllers
 {
@@ -42,25 +43,33 @@ namespace WebApplication2.Controllers
             throw new NotImplementedException();
         }
 
-        public IActionResult Delete(int id) {
- 
+        public IActionResult Delete(int? id) {
+
             return
-                View(_sellerService.Delete(id));
+                View(_sellerService.Delete(id.Value));
         }
 
         // GET: Seller/Details/5
-        public IActionResult Details(int id) {
+        public IActionResult Details(int? id) {
 
+            if (id == null)
+                return NotFound();
+            Seller seller = _sellerService.FindById(id.Value);
+            if (seller == null)
+                return NotFound();
 
             return
-                View(_sellerService.FindById(id));
+                View(seller);
         }
 
         // GET: Seller/Edit/5
-        public IActionResult Edit(int id) {
+        public IActionResult Edit(int? id) {
 
             var depto = _departmentsService.FindAll();
-            var seller = _sellerService.FindById(id);
+            if (id == null)
+                return NotFound();
+
+            var seller = _sellerService.FindById(id.Value);
 
             SellerFormViewModel viewModel = new SellerFormViewModel(depto, seller);
             //Trazendo os dois objetos para @model
